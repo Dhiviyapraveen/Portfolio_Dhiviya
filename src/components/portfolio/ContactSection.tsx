@@ -12,16 +12,10 @@ export const ContactSection = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Message sent! I'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
-  };
-
   const contactInfo = [
     { icon: Mail, label: "Email", value: "dhiviyachandrasekaran093@gmail.com" },
     { icon: Phone, label: "Phone", value: "+91 9042742416" },
-    { icon: MapPin, label: "Location", value:"Coimbatore,TamilNadu" },
+    { icon: MapPin, label: "Location", value: "Coimbatore,TamilNadu" },
   ];
 
   return (
@@ -37,7 +31,8 @@ export const ContactSection = () => {
             Get In <span className="text-gradient">Touch</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or just want to say hi? Feel free to reach out!
+            Have a project in mind or just want to say hi? Feel free to reach
+            out!
           </p>
         </motion.div>
 
@@ -50,8 +45,9 @@ export const ContactSection = () => {
           >
             <h3 className="text-2xl font-bold mb-6">Let's work together</h3>
             <p className="text-muted-foreground mb-8">
-              I'm always open to discussing new projects, creative ideas, or opportunities 
-              to be part of your vision. Let's create something amazing together!
+              I'm always open to discussing new projects, creative ideas, or
+              opportunities to be part of your vision. Let's create something
+              amazing together!
             </p>
 
             <div className="space-y-6">
@@ -67,7 +63,9 @@ export const ContactSection = () => {
                     <info.icon size={24} />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">{info.label}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {info.label}
+                    </p>
                     <p className="font-medium">{info.value}</p>
                   </div>
                 </motion.div>
@@ -77,22 +75,64 @@ export const ContactSection = () => {
 
           {/* Contact Form */}
           <motion.form
-            onSubmit={handleSubmit}
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.target as HTMLFormElement;
+              const formData = new FormData(form);
+
+              const promise = fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData,
+              }).then(async (response) => {
+                const json = await response.json();
+                if (response.status === 200) {
+                  return json;
+                } else {
+                  throw new Error(json.message);
+                }
+              });
+
+              toast.promise(promise, {
+                loading: "Sending message...",
+                success: () => {
+                  setFormData({ name: "", email: "", message: "" });
+                  return "Message sent successfully!";
+                },
+                error: (err) => {
+                  return (
+                    err.message || "Something went wrong. Please try again."
+                  );
+                },
+              });
+            }}
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="p-8 rounded-2xl bg-gradient-card border border-border shadow-card"
           >
+            {/* TODO: Replace with your actual Web3Forms Access Key */}
+            <input
+              type="hidden"
+              name="access_key"
+              value="f1686139-9669-4a29-9e06-8b5d38219d1c"
+            />
+
             <div className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium mb-2"
+                >
                   Name
                 </label>
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   className="w-full px-4 py-3 rounded-xl bg-secondary border border-border focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
                   placeholder="Your name"
                   required
@@ -100,14 +140,20 @@ export const ContactSection = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium mb-2"
+                >
                   Email
                 </label>
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="w-full px-4 py-3 rounded-xl bg-secondary border border-border focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors"
                   placeholder="your@email.com"
                   required
@@ -115,14 +161,20 @@ export const ContactSection = () => {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium mb-2"
+                >
                   Message
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   className="w-full px-4 py-3 rounded-xl bg-secondary border border-border focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors resize-none"
                   placeholder="Tell me about your project..."
                   required
