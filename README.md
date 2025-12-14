@@ -1,73 +1,78 @@
-# Welcome to your Lovable project
+# 🌐 Personal Portfolio Website
 
-## Project info
+A modern, responsive personal portfolio website built to showcase my skills, projects, experience, and achievements with a clean UI and smooth animations.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## ✨ Features
 
-## How can I edit this code?
+- ⚡ Smooth animations using Framer Motion
+- 📱 Fully responsive design (mobile, tablet, desktop)
+- 🎨 Modern dark UI with gradient accents
+- 🧭 Sticky navigation with scroll effects
+- 📂 Sections for About, Experience, Projects, Achievements, Skills, and Contact
+- 📄 Resume download option
+- 🔗 Social media integration (GitHub, LinkedIn, Email)
 
-There are several ways of editing your application.
+## 🛠 Tech Stack
 
-**Use Lovable**
+- Frontend: React.js
+- Styling: Tailwind CSS
+- Animations: Framer Motion
+- Icons: Lucide React
+- Build Tool: Vite
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🚀 Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
+- Node.js (v16 or above)
+- npm or yarn
 
-**Use your preferred IDE**
+### Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+git clone https://github.com/your-username/portfolio.git  
+cd portfolio  
+npm install  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Run Locally
 
-Follow these steps:
+npm run dev  
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+The app will run on:
+http://localhost:5173
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 📁 Project Structure
 
-# Step 3: Install the necessary dependencies.
-npm i
+src/  
+│── components/  
+│   ├── layout/  
+│   │   └── Navigation.jsx  
+│   ├── sections/  
+│   │   ├── HeroSection.jsx  
+│   │   ├── AboutSection.jsx  
+│   │   ├── ProjectsSection.jsx  
+│   │   ├── SkillsSection.jsx  
+│   │   └── ContactSection.jsx  
+│── assets/  
+│── App.jsx  
+│── main.jsx  
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 🖼 Preview
 
-**Edit a file directly in GitHub**
+Designed with a minimal dark theme and gradient highlights for a modern developer portfolio feel.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📌 Customization
 
-**Use GitHub Codespaces**
+- Update personal details in the HeroSection
+- Modify navigation links in Navigation.jsx
+- Add or remove sections easily using modular components
+- Replace resume file in the public/ folder
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🌍 Deployment
 
-## What technologies are used for this project?
+This project can be deployed using:
+- Vercel
+- GitHub Pages
 
-This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
 
-## How can I deploy this project?
+⭐ If you like this project, consider giving it a star!
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
